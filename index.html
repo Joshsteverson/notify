@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="backbonejs">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   	<link rel="icon" href="favicon.png">
+
+    <title>(Sp)Notify</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <script type="text/template" id="listbegin-template">
+      <table class="table table-hover">
+    </script> 
+    <script type="text/template" id="artistlist-template">
+      <tr>
+        <td><div class="searchresult" artist="<%-artistdata%>"><img src="spotify.png" class="searchresulticon"> <%-name.toUpperCase()%></div></td>
+      </tr>
+    </script> 
+    <script type="text/template" id="artistlistnoresults-template">
+      <tr>
+        <td class="searchresult"><img src="spotify.png" class="searchresulticon"> No Matching Results Found.</td>
+      </tr>
+    </script>     
+    <script type="text/template" id="listend-template">
+      </table>
+    </script>  
+    <script type="text/template" id="setartist-template">
+      <span class="setartist"><img src="spotify.png" class="searchresulticon"> <%-name%></span>
+    </script> 
+    <script type="text/template" id="searcheslist-template">
+      <tr>
+        <td>
+          <% if(pinned){ %>
+          <a href="#" class="pintrigger" toggle="false" searchid="<%-_id%>"><span class="glyphicon glyphicon-pushpin"></span></a> 
+          <% }else{ %>
+          <a href="#" class="pintrigger" toggle="true" searchid="<%-_id%>"><span class="glyphicon glyphicon-plus"></span></a> 
+          <% } %>
+          <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#<%-_id.toUpperCase()%>" aria-expanded="false" aria-controls="<%-_id.toUpperCase()%>">
+            <%-artistname.toUpperCase()%>
+          </a>
+          <a href="#" class="deletesearch" searchid="<%-_id%>"><span class="glyphicon glyphicon-remove-circle"></span></a>
+          <div class="collapse" id="<%-_id.toUpperCase()%>">
+            <div class="well">
+              Other things here.
+            </div>
+          </div>
+        </td>
+      </tr>
+    </script>      
+    
+    <div class="centerme">
+      <h2><s>Sp</s><u>N</u>otify</h2>
+      <p>A notification system for saved Spotify searches</p>
+      <div class="text-right"> <label for="emailaddress">Email Address:</label> <a id="emaildisplay" href="#"></a> </div>
+    </div>
+    
+
+    <div class="circular">
+      <div role="tabpanel" class="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#searches" aria-controls="searches" role="tab" data-toggle="tab">Searches</a></li>
+          <li role="presentation"><a href="#searchschedule" aria-controls="searchschedule" role="tab" data-toggle="tab">Search Schedule</a></li>
+          <li role="presentation"><a href="#currentresults" aria-controls="currentresults" role="tab" data-toggle="tab">Current Results</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="searches">
+            <div id="searcheslistcontainer"></div>
+            <button type="button" style="float:right;" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addnewsearch">
+              <span class="glyphicon glyphicon-pushpin"></span> pin new search to schedule
+            </button>
+            <br><hr>
+            
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="searchschedule">h</div>
+          <div role="tabpanel" class="tab-pane" id="currentresults">m</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="addnewsearch">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Create new search</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              <form id="frmnewsearch">
+                <div class="form-group">
+                  <label for="artistname">Artist:</label> 
+                  <div class="input-group" id="setartistinput">
+                    
+                    <input required class="form-control" type="text" id="artistname" />
+                    <span class="input-group-addon searchly" id="manualsearch"><span class="glyphicon glyphicon-search"></span>
+                    </span>
+                  </div>
+                  <div id="setartistcontainer"></div>
+                                
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="searchtype">Search Type:</label>
+                      <select required id="searchtype" class="form-control">
+                        <option>Artist</option>
+                        <option>Album</option>
+                        <option>Track</option>
+                        <option>All</option>
+                      </select>
+                    </div>
+                
+                  </div>
+                 <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="keyword">Key word:</label> 
+                      <input required placeholder="artist/album/track name" class="form-control" type="text" id="keyword" />
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="releasedate">Release Year:</label> 
+                      <input required maxlength="4" placeholder="4-digit year" class="form-control numsonly" type="text" id="releasedate" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="releasedate">New Release</label> (This Year):
+                      <input type="checkbox" id="newrelease" /> 
+                    </div>
+                  </div>
+                  
+                </div>
+              </form>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary btn-sm" id="pinnewsearch">Pin to Schedule</button>
+            <button type="button" class="btn btn-primary btn-sm" id="unpinnewsearch">Save as Unpinned</button>
+          </div>
+
+        </div><!-- /.modal-content -->
+
+      </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="addemail">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Enter email address</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              <form id="frmemail">
+                <div class="form-group">
+                  <label for="emailaddress">Email Address:</label> 
+                  <div class="input-group">
+                    
+                    <input required class="form-control" type="email" id="emailaddress" />
+                    <span class="input-group-addon searchly" id="addemailaddress"><span class="glyphicon glyphicon-log-in"></span>
+                    </span>
+                  </div>
+                  
+                                
+                </div>
+                
+              </form>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary btn-sm" id="beginsearches">Begin Searches</button>
+          </div>
+
+        </div><!-- /.modal-content -->
+
+      </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal -->
+
+
+
+    <!-- Bootstrap core JS + BackboneJS -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+	  <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../backbone/node_modules/underscore/underscore.js"></script>
+    <script src="../backbone/backbone-min.js"></script>
+
+    <script src="js/model.js"></script>
+    <script src="js/collection.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
+    
+  </body>
+
+  </html>

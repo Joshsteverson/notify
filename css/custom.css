@@ -1,0 +1,73 @@
+
+.circular {
+	border:1px solid #81b71a;
+	border-top: none;
+	border-radius: 500px;
+	padding: 20px;
+	padding-top: 0px;
+	margin:auto;
+	width:50%;
+	
+}
+
+.circular:hover {
+	box-shadow: inset 0 1px 1px rgba(122, 163, 26, 0), 0 0 8px rgba(122, 163, 26, 0.6);
+}
+
+.tabpanel {
+	width:74% !important;
+	margin:auto;
+}
+
+.centerme {
+
+	padding: 20px;
+	padding-top: 0px;
+	margin:auto;
+	width:412px;
+}
+.searchly:hover {
+	cursor:pointer;
+}
+
+.searchresult {
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.searchresulticon {
+	width:15px;
+	height:15px;
+	color:red;
+}
+
+.popover {
+    left: 0px !important;
+    width:100% !important;
+}
+
+.setartist {
+	font-weight: bold;
+	font-size: 12px;
+	color: gray;	
+	cursor:pointer;
+}
+
+body{
+	color:gray;
+}
+
+.btn-primary {
+	background-color: #81b71a !important;
+	outline-color: #7aa32d !important;
+	border-color: #7aa32d !important;
+}
+
+.form-control:focus {
+  border-color: #7aa32d;
+  box-shadow: inset 0 1px 1px rgba(122, 163, 26, 0), 0 0 8px rgba(122, 163, 26, 0.6);
+}
+
+a{
+	color:#7aa32d;
+}
