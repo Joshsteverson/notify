@@ -1,0 +1,22 @@
+{
+  "name": "spnotify",
+  "homepage": "https://github.com/Joshsteverson/notify",
+  "authors": [
+    "steversj <Joshua.Steverson-Contractor@adp.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.3",
+    "bootstrap": "~3.3.6"
+  }
+}

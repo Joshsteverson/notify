@@ -1,0 +1,26 @@
+{
+  "name": "notify",
+  "version": "1.0.0",
+  "description": "Spotify Search App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshsteverson/notify.git"
+  },
+  "author": "JDS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joshsteverson/notify/issues"
+  },
+  "homepage": "https://github.com/Joshsteverson/notify#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.7",
+    "querystring": "^0.2.0",
+    "request": "^2.69.0"
+  }
+}
